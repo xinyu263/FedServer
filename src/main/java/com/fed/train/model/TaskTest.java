@@ -14,6 +14,9 @@ import org.deeplearning4j.nn.conf.layers.DenseLayer;
 import org.deeplearning4j.nn.conf.layers.OutputLayer;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.nn.weights.WeightInit;
+import org.deeplearning4j.optimize.api.InvocationType;
+import org.deeplearning4j.optimize.listeners.EvaluativeListener;
+import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
 import org.nd4j.evaluation.classification.Evaluation;
 import org.nd4j.linalg.activations.Activation;
 import org.nd4j.linalg.dataset.api.iterator.DataSetIterator;
@@ -29,58 +32,36 @@ import java.util.Random;
 public class TaskTest {
 
 
-/*    public static int seed=123456;
-    public static int inX=100;
-    public static int inY=100;
-    public static int outputNum=5;*/
-
     public static void main(String[] args) throws IOException {
 
-/*        MultiLayerConfiguration config=new NeuralNetConfiguration.Builder()
-                .seed(seed)
-                .updater(new Nesterovs(0.1, 0.9))
-                .list()
-                .layer(0,new DenseLayer.Builder()
-                    .nIn(inX*inY)
-                    .nOut(500)
-                    .build())
-                .layer(new DenseLayer.Builder() //create the second input layer
-                        .nIn(500)
-                        .nOut(100)
-                        .build())
-                .layer(new OutputLayer.Builder(LossFunctions.LossFunction.NEGATIVELOGLIKELIHOOD) //create hidden layer
-                        .activation(Activation.SOFTMAX)
-                        .nOut(outputNum)
-                        .build())
-                .build();*/
 
         int height = 370;  // 输入图像高度
         int width = 1224;   // 输入图像宽度
         int channels = 3; // 输入图像通道数
         int outputNum = 5; //分类
         int batchSize = 64;
-        int nEpochs = 100;
+        int nEpochs = 1;
         int seed = 1234;
         Random randNumGen = new Random(seed);
 
-        String inputDataDir="";
+        String inputDataDir="D:\\Data\\processed\\";
 
 
-// 训练数据的向量化
-        File trainData = new File(inputDataDir + "/train");
+        // 训练数据的向量化
+        File trainData = new File(inputDataDir + "train");
         FileSplit trainSplit = new FileSplit(trainData, NativeImageLoader.ALLOWED_FORMATS, randNumGen);
         ParentPathLabelGenerator labelMaker = new ParentPathLabelGenerator(); // parent path as the image label
         ImageRecordReader trainRR = new ImageRecordReader(height, width, channels, labelMaker);
         trainRR.initialize(trainSplit);
         DataSetIterator trainIter = new RecordReaderDataSetIterator(trainRR, batchSize, 1, outputNum);
 
-// 将像素从0-255缩放到0-1 (用min-max的方式进行缩放)
+        // 将像素从0-255缩放到0-1 (用min-max的方式进行缩放)
         DataNormalization scaler = new ImagePreProcessingScaler(0, 1);
         scaler.fit(trainIter);
         trainIter.setPreProcessor(scaler);
 
-// 测试数据的向量化
-        File testData = new File(inputDataDir + "/test");
+        // 测试数据的向量化
+        File testData = new File(inputDataDir + "test");
         FileSplit testSplit = new FileSplit(testData, NativeImageLoader.ALLOWED_FORMATS, randNumGen);
         ImageRecordReader testRR = new ImageRecordReader(height, width, channels, labelMaker);
         testRR.initialize(testSplit);
@@ -141,7 +122,7 @@ public class TaskTest {
         net.init();
 
         // 训练的过程中同时进行评估
-        for (int i = 0; i < nEpochs; i++) {
+/*        for (int i = 0; i < nEpochs; i++) {
             net.fit(trainIter);
             System.out.println("Completed epoch " + i);
             Evaluation trainEval = net.evaluate(trainIter);
@@ -150,7 +131,10 @@ public class TaskTest {
             System.out.println("val: " + eval.precision());
             trainIter.reset();
             testIter.reset();
-        }
+        }*/
+
+        net.setListeners(new ScoreIterationListener(10), new EvaluativeListener(testIter, 1, InvocationType.EPOCH_END)); //Print score every 10 iterations and evaluate on test set every epoch
+        net.fit(trainIter, nEpochs);
 
 
     }
