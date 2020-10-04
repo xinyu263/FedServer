@@ -170,7 +170,7 @@ public class TaskTest {
         Evaluation eval = net.evaluate(testIter);
         log.info(eval.stats());
 
-        String path="model/MyClassification.zip";
+        String path="model/MyClassification2.zip";
         File locationToSave = new File(path);
         boolean saveUpdater = true;
         net.save(locationToSave, saveUpdater);

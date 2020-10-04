@@ -1,5 +1,7 @@
 MyClassification.zip
 
+训练集95%，测试集5%
+
 ========================Evaluation Metrics========================
  # of classes:    5
  Accuracy:        0.9545
