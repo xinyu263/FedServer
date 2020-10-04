@@ -17,13 +17,17 @@ import org.deeplearning4j.nn.weights.WeightInit;
 import org.deeplearning4j.optimize.api.InvocationType;
 import org.deeplearning4j.optimize.listeners.EvaluativeListener;
 import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
+import org.deeplearning4j.util.ModelSerializer;
 import org.nd4j.evaluation.classification.Evaluation;
 import org.nd4j.linalg.activations.Activation;
 import org.nd4j.linalg.dataset.api.iterator.DataSetIterator;
 import org.nd4j.linalg.dataset.api.preprocessor.DataNormalization;
 import org.nd4j.linalg.dataset.api.preprocessor.ImagePreProcessingScaler;
 import org.nd4j.linalg.learning.config.Adam;
+import org.nd4j.linalg.learning.config.Nadam;
 import org.nd4j.linalg.lossfunctions.LossFunctions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,20 +35,24 @@ import java.util.Random;
 
 public class TaskTest {
 
+    private static Logger log = LoggerFactory.getLogger(TaskTest.class);
 
     public static void main(String[] args) throws IOException {
 
 
         int height = 370;  // 输入图像高度
         int width = 1224;   // 输入图像宽度
-        int channels = 3; // 输入图像通道数
+        int channels = 1; // 输入图像通道数
         int outputNum = 5; //分类
-        int batchSize = 64;
+        int batchSize = 64;//64
         int nEpochs = 1;
         int seed = 1234;
         Random randNumGen = new Random(seed);
 
-        String inputDataDir="D:\\Data\\processed\\";
+
+        //String inputDataDir="D:\\Data\\processed\\";
+        //String inputDataDir="D:\\Data\\processedGrey\\";
+        String inputDataDir="D:\\Data\\processedGrey2\\";
 
 
         // 训练数据的向量化
@@ -118,8 +126,28 @@ public class TaskTest {
                 .build();
 
 
-        MultiLayerNetwork net = new MultiLayerNetwork(conf);
-        net.init();
+        MultiLayerConfiguration conf1 = new NeuralNetConfiguration.Builder()
+                .seed(seed) //include a random seed for reproducibility
+                .activation(Activation.RELU)
+                .weightInit(WeightInit.XAVIER)
+                .updater(new Nadam())
+                .l2(0.0005) // regularize learning model
+                .list()
+                .layer(new DenseLayer.Builder() //create the first input layer.
+                        .nIn(height * width)
+                        .nOut(500)
+                        .build())
+                .layer(new DenseLayer.Builder() //create the second input layer
+                        .nIn(500)
+                        .nOut(100)
+                        .build())
+                .layer(new OutputLayer.Builder(LossFunctions.LossFunction.NEGATIVELOGLIKELIHOOD) //create hidden layer
+                        .activation(Activation.SOFTMAX)
+                        .nOut(outputNum)
+                        .build())
+                .build();
+
+
 
         // 训练的过程中同时进行评估
 /*        for (int i = 0; i < nEpochs; i++) {
@@ -133,8 +161,29 @@ public class TaskTest {
             testIter.reset();
         }*/
 
-        net.setListeners(new ScoreIterationListener(10), new EvaluativeListener(testIter, 1, InvocationType.EPOCH_END)); //Print score every 10 iterations and evaluate on test set every epoch
+
+        MultiLayerNetwork net = new MultiLayerNetwork(conf);
+        net.init();
+        net.setListeners(new ScoreIterationListener(10), new EvaluativeListener(testIter, 1, InvocationType.EPOCH_END));
         net.fit(trainIter, nEpochs);
+        log.info("Evaluate model....");
+        Evaluation eval = net.evaluate(testIter);
+        log.info(eval.stats());
+
+        String path="model/MyClassification.zip";
+        File locationToSave = new File(path);
+        boolean saveUpdater = true;
+        net.save(locationToSave, saveUpdater);
+
+/*        MultiLayerNetwork net1=new MultiLayerNetwork(conf1);
+        net1.init();
+        net1.setListeners(new ScoreIterationListener(1));  //print the score with every iteration
+        log.info("Train model....");
+        net1.fit(trainIter, nEpochs);
+        log.info("Evaluate model....");
+        Evaluation eval1 = net1.evaluate(testIter);
+        log.info(eval1.stats());*/
+
 
 
     }

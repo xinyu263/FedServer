@@ -1,0 +1,49 @@
+MyClassification.zip
+
+========================Evaluation Metrics========================
+ # of classes:    5
+ Accuracy:        0.9545
+ Precision:       0.9643
+ Recall:          0.9573
+ F1 Score:        0.9591
+Precision, recall & F1: macro-averaged (equally weighted avg. of 5 classes)
+
+
+=========================Confusion Matrix=========================
+   0   1   2   3   4
+---------------------
+ 132   0   0   4   0 | 0 = 0
+   1 129   0   0  24 | 1 = 1
+   0   0  70   0   0 | 2 = 2
+   0   2   0 186   0 | 3 = 3
+   0   2   0   0 176 | 4 = 4
+
+Confusion matrix format: Actual (rowClass) predicted as (columnClass) N times
+==================================================================
+14:58:46.006 [main] DEBUG org.nd4j.linalg.dataset.AsyncDataSetIterator - Manually destroying ADSI workspace
+14:58:46.052 [main] INFO com.fed.train.model.TaskTest - Evaluate model....
+14:58:55.991 [main] DEBUG org.nd4j.linalg.dataset.AsyncDataSetIterator - Manually destroying ADSI workspace
+14:58:56.051 [main] INFO com.fed.train.model.TaskTest -
+
+========================Evaluation Metrics========================
+ # of classes:    5
+ Accuracy:        0.9545
+ Precision:       0.9643
+ Recall:          0.9573
+ F1 Score:        0.9591
+Precision, recall & F1: macro-averaged (equally weighted avg. of 5 classes)
+
+
+=========================Confusion Matrix=========================
+   0   1   2   3   4
+---------------------
+ 132   0   0   4   0 | 0 = 0
+   1 129   0   0  24 | 1 = 1
+   0   0  70   0   0 | 2 = 2
+   0   2   0 186   0 | 3 = 3
+   0   2   0   0 176 | 4 = 4
+
+Confusion matrix format: Actual (rowClass) predicted as (columnClass) N times
+==================================================================
+
+Process finished with exit code 0

@@ -39,8 +39,8 @@
             </exclusions>
         </dependency>
 
-        <!--    DL4J配置-->
 
+        <!--    DL4J配置-->
         <!-- deeplearning4j-core: contains main functionality and neural networks -->
         <dependency>
             <groupId>org.deeplearning4j</groupId>
