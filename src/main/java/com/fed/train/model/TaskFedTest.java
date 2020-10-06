@@ -40,13 +40,14 @@ public class TaskFedTest {
         int channels = 1; // 输入图像通道数
         int outputNum = 5; //分类
         int batchSize = 64;//64
-        int nEpochs = 10;//本地迭代次数
+        int nEpochs = 1;//本地迭代次数
         int seed = 1234;
         Random randNumGen = new Random(seed);
 
-        String inputDataDir="D:\\Data\\dataOnAndroid\\";
-        int userNum=1;//10，参与方数量
-        int globalIteration=1;
+        //String inputDataDir="D:\\Data\\onAndroid\\";
+        String inputDataDir="D:\\Data\\compressedonAndroid\\";
+        int userNum=5;//10，参与方数量
+        int globalIteration=3;
 
         DataNormalization scaler = new ImagePreProcessingScaler(0, 1);
         ParentPathLabelGenerator labelMaker = new ParentPathLabelGenerator();
@@ -141,7 +142,7 @@ public class TaskFedTest {
         for(int i=0;i<globalIteration;i++){
             for(int j=0;j<userNum;j++){
                 log.info("train model "+j);
-                    nets.get(j).fit(trainIter.get(j),nEpochs);
+                nets.get(j).fit(trainIter.get(j),nEpochs);
             }
         }
 

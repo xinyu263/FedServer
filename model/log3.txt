@@ -1,0 +1,265 @@
+MyClassification_compressed.zip
+
+训练集80%，测试集20%
+图像为612*185，灰度图
+
+
+13:54:21.323 [main] INFO org.datavec.image.recordreader.BaseImageRecordReader - ImageRecordReader: 5 label classes inferred using label generator ParentPathLabelGenerator
+13:54:21.350 [main] INFO org.datavec.image.recordreader.BaseImageRecordReader - ImageRecordReader: 5 label classes inferred using label generator ParentPathLabelGenerator
+13:54:21.404 [main] INFO org.nd4j.linalg.factory.Nd4jBackend - Loaded [CpuBackend] backend
+13:54:21.750 [main] INFO org.nd4j.nativeblas.NativeOpsHolder - Number of threads used for linear algebra: 6
+13:54:21.751 [main] WARN org.nd4j.linalg.cpu.nativecpu.CpuNDArrayFactory - *********************************** CPU Feature Check Warning ***********************************
+13:54:21.751 [main] WARN org.nd4j.linalg.cpu.nativecpu.CpuNDArrayFactory - Warning: Initializing ND4J with Generic x86 binary on a CPU with AVX/AVX2 support
+13:54:21.751 [main] WARN org.nd4j.linalg.cpu.nativecpu.CpuNDArrayFactory - Using ND4J with AVX/AVX2 will improve performance. See deeplearning4j.org/cpu for more details
+13:54:21.751 [main] WARN org.nd4j.linalg.cpu.nativecpu.CpuNDArrayFactory - Or set environment variable ND4J_IGNORE_AVX=true to suppress this warning
+13:54:21.751 [main] WARN org.nd4j.linalg.cpu.nativecpu.CpuNDArrayFactory - *************************************************************************************************
+13:54:21.770 [main] INFO org.nd4j.nativeblas.Nd4jBlas - Number of threads used for OpenMP BLAS: 6
+13:54:21.776 [main] INFO org.nd4j.linalg.api.ops.executioner.DefaultOpExecutioner - Backend used: [CPU]; OS: [Windows 10]
+13:54:21.776 [main] INFO org.nd4j.linalg.api.ops.executioner.DefaultOpExecutioner - Cores: [12]; Memory: [3.5GB];
+13:54:21.776 [main] INFO org.nd4j.linalg.api.ops.executioner.DefaultOpExecutioner - Blas vendor: [OPENBLAS]
+13:54:21.886 [main] INFO org.deeplearning4j.nn.multilayer.MultiLayerNetwork - Starting MultiLayerNetwork with WorkspaceModes set to [training: ENABLED; inference: ENABLED], cacheMode set to [NONE]
+13:54:27.838 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 0 is 2.6365821045392686
+13:54:43.636 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 10 is 0.34724522318253326
+13:54:59.017 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 20 is 0.3132561016165013
+13:55:12.386 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 30 is 0.31941094868540343
+13:55:26.326 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 40 is 0.1810323996314067
+13:55:39.419 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 50 is 0.17203785340390534
+13:55:54.460 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 60 is 0.11580055948753298
+13:56:09.145 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 70 is 0.11212477475087294
+13:56:22.140 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 80 is 0.10900221195399225
+13:56:35.524 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 90 is 0.10500098206495928
+13:56:48.584 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 100 is 0.1049172477748691
+13:57:01.465 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 110 is 0.10517819826416833
+13:57:15.111 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 120 is 0.10525665195344296
+13:57:28.523 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 130 is 0.10095075588739648
+13:57:42.116 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 140 is 0.09369282520428454
+13:57:55.929 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 150 is 0.09521723568620316
+13:58:09.460 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 160 is 0.09820882443770151
+13:58:22.828 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 170 is 0.09401138263054794
+13:58:24.123 [main] INFO org.deeplearning4j.optimize.listeners.EvaluativeListener - Starting evaluation nr. 1
+13:58:33.142 [main] DEBUG org.nd4j.linalg.dataset.AsyncDataSetIterator - Manually destroying ADSI workspace
+13:58:33.157 [main] INFO org.deeplearning4j.optimize.listeners.EvaluativeListener - Reporting evaluation results:
+13:58:33.165 [main] INFO org.deeplearning4j.optimize.listeners.EvaluativeListener - Evaluation:
+
+
+========================Evaluation Metrics========================
+ # of classes:    5
+ Accuracy:        0.8580
+ Precision:       0.8764
+ Recall:          0.8829
+ F1 Score:        0.8779
+Precision, recall & F1: macro-averaged (equally weighted avg. of 5 classes)
+
+
+=========================Confusion Matrix=========================
+   0   1   2   3   4
+---------------------
+ 492  13   0   1   0 | 0 = 0
+  59 487   1  11  38 | 1 = 1
+   0   0 244   0   0 | 2 = 2
+   0 123   0 554  63 | 3 = 3
+   0  26   0  60 610 | 4 = 4
+
+Confusion matrix format: Actual (rowClass) predicted as (columnClass) N times
+==================================================================
+13:58:33.165 [main] DEBUG org.nd4j.linalg.dataset.AsyncDataSetIterator - Manually destroying ADSI workspace
+13:58:45.986 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 180 is 0.09305940549224084
+13:58:59.811 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 190 is 0.09299440071690478
+13:59:13.819 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 200 is 0.09293363466154289
+13:59:28.363 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 210 is 0.092897891067735
+13:59:43.464 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 220 is 0.0929327073856327
+13:59:58.477 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 230 is 0.09274436835349936
+14:00:12.325 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 240 is 0.09213075820462605
+14:00:26.201 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 250 is 0.09253500201380468
+14:00:40.544 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 260 is 0.09230811342413142
+14:00:56.029 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 270 is 0.09190220215065673
+14:01:10.265 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 280 is 0.09209194079227553
+14:01:24.109 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 290 is 0.09222840155092091
+14:01:38.303 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 300 is 0.09178406296867009
+14:01:52.457 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 310 is 0.09260395071067853
+14:02:07.053 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 320 is 0.09187294915869622
+14:02:21.756 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 330 is 0.09167537149958414
+14:02:35.917 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 340 is 0.0916409960092923
+14:02:40.445 [main] INFO org.deeplearning4j.optimize.listeners.EvaluativeListener - Starting evaluation nr. 2
+14:02:50.526 [main] DEBUG org.nd4j.linalg.dataset.AsyncDataSetIterator - Manually destroying ADSI workspace
+14:02:50.542 [main] INFO org.deeplearning4j.optimize.listeners.EvaluativeListener - Reporting evaluation results:
+14:02:50.543 [main] INFO org.deeplearning4j.optimize.listeners.EvaluativeListener - Evaluation:
+
+
+========================Evaluation Metrics========================
+ # of classes:    5
+ Accuracy:        0.8609
+ Precision:       0.8794
+ Recall:          0.8853
+ F1 Score:        0.8805
+Precision, recall & F1: macro-averaged (equally weighted avg. of 5 classes)
+
+
+=========================Confusion Matrix=========================
+   0   1   2   3   4
+---------------------
+ 490  15   0   1   0 | 0 = 0
+  59 492   0  13  32 | 1 = 1
+   0   0 244   0   0 | 2 = 2
+   0 125   0 549  66 | 3 = 3
+   0  18   0  58 620 | 4 = 4
+
+Confusion matrix format: Actual (rowClass) predicted as (columnClass) N times
+==================================================================
+14:02:50.543 [main] DEBUG org.nd4j.linalg.dataset.AsyncDataSetIterator - Manually destroying ADSI workspace
+14:03:01.063 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 350 is 0.09140083895937587
+14:03:16.036 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 360 is 0.09122599960835298
+14:03:30.690 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 370 is 0.09111015543490102
+14:03:44.706 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 380 is 0.09118612248128632
+14:03:59.165 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 390 is 0.09105465255791065
+14:04:13.132 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 400 is 0.09083373318037756
+14:04:27.131 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 410 is 0.09104631929554463
+14:04:40.489 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 420 is 0.0909234647478192
+14:04:54.158 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 430 is 0.09065779289037275
+14:05:07.167 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 440 is 0.0905915528543587
+14:05:20.605 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 450 is 0.09039625227289358
+14:05:34.370 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 460 is 0.09023954203892808
+14:05:47.823 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 470 is 0.0903674518997917
+14:06:01.574 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 480 is 0.09013089657455181
+14:06:15.377 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 490 is 0.09001717787356807
+14:06:29.398 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 500 is 0.08996172259226143
+14:06:42.438 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 510 is 0.08977251249863144
+14:06:49.153 [main] INFO org.deeplearning4j.optimize.listeners.EvaluativeListener - Starting evaluation nr. 3
+14:06:57.817 [main] DEBUG org.nd4j.linalg.dataset.AsyncDataSetIterator - Manually destroying ADSI workspace
+14:06:57.833 [main] INFO org.deeplearning4j.optimize.listeners.EvaluativeListener - Reporting evaluation results:
+14:06:57.834 [main] INFO org.deeplearning4j.optimize.listeners.EvaluativeListener - Evaluation:
+
+
+========================Evaluation Metrics========================
+ # of classes:    5
+ Accuracy:        0.8627
+ Precision:       0.8808
+ Recall:          0.8866
+ F1 Score:        0.8820
+Precision, recall & F1: macro-averaged (equally weighted avg. of 5 classes)
+
+
+=========================Confusion Matrix=========================
+   0   1   2   3   4
+---------------------
+ 489  16   0   1   0 | 0 = 0
+  58 493   0  12  33 | 1 = 1
+   0   0 244   0   0 | 2 = 2
+   0 121   0 555  64 | 3 = 3
+   0  17   0  60 619 | 4 = 4
+
+Confusion matrix format: Actual (rowClass) predicted as (columnClass) N times
+==================================================================
+14:06:57.834 [main] DEBUG org.nd4j.linalg.dataset.AsyncDataSetIterator - Manually destroying ADSI workspace
+14:07:05.006 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 520 is 0.08968687873780792
+14:07:18.476 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 530 is 0.08961239965134607
+14:07:32.521 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 540 is 0.08938699563297325
+14:07:45.736 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 550 is 0.08929766173552156
+14:07:58.837 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 560 is 0.08925662362931004
+14:08:12.604 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 570 is 0.0890250381080461
+14:08:26.052 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 580 is 0.0890622145716992
+14:08:39.900 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 590 is 0.08893955685113936
+14:08:53.612 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 600 is 0.08878430136282996
+14:09:07.051 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 610 is 0.08865358946321591
+14:09:20.752 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 620 is 0.08849570074843265
+14:09:34.327 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 630 is 0.08840132653284562
+14:09:47.780 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 640 is 0.0883268404879216
+14:10:01.321 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 650 is 0.0881325845135209
+14:10:14.812 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 660 is 0.08804355022670479
+14:10:27.706 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 670 is 0.08793984529902203
+14:10:40.614 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 680 is 0.08780223043007046
+14:10:49.677 [main] INFO org.deeplearning4j.optimize.listeners.EvaluativeListener - Starting evaluation nr. 4
+14:10:59.415 [main] DEBUG org.nd4j.linalg.dataset.AsyncDataSetIterator - Manually destroying ADSI workspace
+14:10:59.430 [main] INFO org.deeplearning4j.optimize.listeners.EvaluativeListener - Reporting evaluation results:
+14:10:59.431 [main] INFO org.deeplearning4j.optimize.listeners.EvaluativeListener - Evaluation:
+
+
+========================Evaluation Metrics========================
+ # of classes:    5
+ Accuracy:        0.8641
+ Precision:       0.8821
+ Recall:          0.8878
+ F1 Score:        0.8832
+Precision, recall & F1: macro-averaged (equally weighted avg. of 5 classes)
+
+
+=========================Confusion Matrix=========================
+   0   1   2   3   4
+---------------------
+ 489  16   0   1   0 | 0 = 0
+  58 495   0  12  31 | 1 = 1
+   0   0 244   0   0 | 2 = 2
+   0 124   0 556  60 | 3 = 3
+   0  17   0  59 620 | 4 = 4
+
+Confusion matrix format: Actual (rowClass) predicted as (columnClass) N times
+==================================================================
+14:10:59.432 [main] DEBUG org.nd4j.linalg.dataset.AsyncDataSetIterator - Manually destroying ADSI workspace
+14:11:04.031 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 690 is 0.0876344237894976
+14:11:18.930 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 700 is 0.0875574940086317
+14:11:33.824 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 710 is 0.08745571745182953
+14:11:49.862 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 720 is 0.08736174610605514
+14:12:03.874 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 730 is 0.08716215160131907
+14:12:18.474 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 740 is 0.0870409898421387
+14:12:33.439 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 750 is 0.08697187756910894
+14:12:46.553 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 760 is 0.08684792592522493
+14:13:00.791 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 770 is 0.08671518017546989
+14:13:15.156 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 780 is 0.08657883152138238
+14:13:29.409 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 790 is 0.08645884316548867
+14:13:43.401 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 800 is 0.08627535293252563
+14:13:56.961 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 810 is 0.08612045438274663
+14:14:11.517 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 820 is 0.08606654747866929
+14:14:26.618 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 830 is 0.08589269339266646
+14:14:41.436 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 840 is 0.08578794051735028
+14:14:56.164 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 850 is 0.08566694045616387
+14:15:09.917 [main] INFO org.deeplearning4j.optimize.listeners.EvaluativeListener - Starting evaluation nr. 5
+14:15:20.016 [main] DEBUG org.nd4j.linalg.dataset.AsyncDataSetIterator - Manually destroying ADSI workspace
+14:15:20.033 [main] INFO org.deeplearning4j.optimize.listeners.EvaluativeListener - Reporting evaluation results:
+14:15:20.034 [main] INFO org.deeplearning4j.optimize.listeners.EvaluativeListener - Evaluation:
+
+
+========================Evaluation Metrics========================
+ # of classes:    5
+ Accuracy:        0.8630
+ Precision:       0.8811
+ Recall:          0.8868
+ F1 Score:        0.8823
+Precision, recall & F1: macro-averaged (equally weighted avg. of 5 classes)
+
+
+=========================Confusion Matrix=========================
+   0   1   2   3   4
+---------------------
+ 488  17   0   1   0 | 0 = 0
+  58 493   0  13  32 | 1 = 1
+   0   0 244   0   0 | 2 = 2
+   0 119   0 555  66 | 3 = 3
+   0  16   0  59 621 | 4 = 4
+
+Confusion matrix format: Actual (rowClass) predicted as (columnClass) N times
+==================================================================
+14:15:20.034 [main] DEBUG org.nd4j.linalg.dataset.AsyncDataSetIterator - Manually destroying ADSI workspace
+14:15:20.050 [main] INFO com.fed.train.model.TaskTest - Evaluate model....
+14:15:29.556 [main] DEBUG org.nd4j.linalg.dataset.AsyncDataSetIterator - Manually destroying ADSI workspace
+14:15:29.572 [main] INFO com.fed.train.model.TaskTest -
+
+========================Evaluation Metrics========================
+ # of classes:    5
+ Accuracy:        0.8630
+ Precision:       0.8811
+ Recall:          0.8868
+ F1 Score:        0.8823
+Precision, recall & F1: macro-averaged (equally weighted avg. of 5 classes)
+
+
+=========================Confusion Matrix=========================
+   0   1   2   3   4
+---------------------
+ 488  17   0   1   0 | 0 = 0
+  58 493   0  13  32 | 1 = 1
+   0   0 244   0   0 | 2 = 2
+   0 119   0 555  66 | 3 = 3
+   0  16   0  59 621 | 4 = 4
+
+Confusion matrix format: Actual (rowClass) predicted as (columnClass) N times
+==================================================================

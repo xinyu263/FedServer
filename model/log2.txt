@@ -1,0 +1,201 @@
+分布式训练
+
+
+14:45:29.619 [main] INFO org.datavec.image.recordreader.BaseImageRecordReader - ImageRecordReader: 5 label classes inferred using label generator ParentPathLabelGenerator
+14:45:29.647 [main] INFO org.datavec.image.recordreader.BaseImageRecordReader - ImageRecordReader: 5 label classes inferred using label generator ParentPathLabelGenerator
+14:45:30.423 [main] INFO org.datavec.image.recordreader.BaseImageRecordReader - ImageRecordReader: 5 label classes inferred using label generator ParentPathLabelGenerator
+14:45:30.552 [main] INFO org.datavec.image.recordreader.BaseImageRecordReader - ImageRecordReader: 5 label classes inferred using label generator ParentPathLabelGenerator
+14:45:30.962 [main] INFO org.datavec.image.recordreader.BaseImageRecordReader - ImageRecordReader: 5 label classes inferred using label generator ParentPathLabelGenerator
+14:45:31.034 [main] INFO org.datavec.image.recordreader.BaseImageRecordReader - ImageRecordReader: 5 label classes inferred using label generator ParentPathLabelGenerator
+14:45:31.301 [main] INFO org.datavec.image.recordreader.BaseImageRecordReader - ImageRecordReader: 5 label classes inferred using label generator ParentPathLabelGenerator
+14:45:31.351 [main] INFO org.datavec.image.recordreader.BaseImageRecordReader - ImageRecordReader: 5 label classes inferred using label generator ParentPathLabelGenerator
+14:45:31.375 [main] INFO org.datavec.image.recordreader.BaseImageRecordReader - ImageRecordReader: 5 label classes inferred using label generator ParentPathLabelGenerator
+14:45:31.400 [main] INFO org.datavec.image.recordreader.BaseImageRecordReader - ImageRecordReader: 5 label classes inferred using label generator ParentPathLabelGenerator
+14:45:31.406 [main] INFO org.datavec.image.recordreader.BaseImageRecordReader - ImageRecordReader: 5 label classes inferred using label generator ParentPathLabelGenerator
+14:45:31.433 [main] INFO org.nd4j.linalg.factory.Nd4jBackend - Loaded [CpuBackend] backend
+14:45:31.748 [main] INFO org.nd4j.nativeblas.NativeOpsHolder - Number of threads used for linear algebra: 6
+14:45:31.749 [main] WARN org.nd4j.linalg.cpu.nativecpu.CpuNDArrayFactory - *********************************** CPU Feature Check Warning ***********************************
+14:45:31.750 [main] WARN org.nd4j.linalg.cpu.nativecpu.CpuNDArrayFactory - Warning: Initializing ND4J with Generic x86 binary on a CPU with AVX/AVX2 support
+14:45:31.750 [main] WARN org.nd4j.linalg.cpu.nativecpu.CpuNDArrayFactory - Using ND4J with AVX/AVX2 will improve performance. See deeplearning4j.org/cpu for more details
+14:45:31.750 [main] WARN org.nd4j.linalg.cpu.nativecpu.CpuNDArrayFactory - Or set environment variable ND4J_IGNORE_AVX=true to suppress this warning
+14:45:31.750 [main] WARN org.nd4j.linalg.cpu.nativecpu.CpuNDArrayFactory - *************************************************************************************************
+14:45:31.785 [main] INFO org.nd4j.nativeblas.Nd4jBlas - Number of threads used for OpenMP BLAS: 6
+14:45:31.791 [main] INFO org.nd4j.linalg.api.ops.executioner.DefaultOpExecutioner - Backend used: [CPU]; OS: [Windows 10]
+14:45:31.791 [main] INFO org.nd4j.linalg.api.ops.executioner.DefaultOpExecutioner - Cores: [12]; Memory: [3.5GB];
+14:45:31.791 [main] INFO org.nd4j.linalg.api.ops.executioner.DefaultOpExecutioner - Blas vendor: [OPENBLAS]
+14:45:31.820 [main] INFO com.fed.train.model.TaskFedTest - create model....
+14:45:31.831 [main] INFO org.deeplearning4j.nn.multilayer.MultiLayerNetwork - Starting MultiLayerNetwork with WorkspaceModes set to [training: ENABLED; inference: ENABLED], cacheMode set to [NONE]
+14:45:36.115 [main] INFO com.fed.train.model.TaskFedTest - train model....
+14:45:36.115 [main] INFO com.fed.train.model.TaskFedTest - train model 0
+14:45:45.470 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 0 is 2.0919114087444752
+14:46:39.090 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 10 is 0.9488504139408451
+14:47:31.633 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 20 is 0.1994746161740804
+14:47:31.640 [main] INFO org.deeplearning4j.optimize.listeners.EvaluativeListener - Starting evaluation nr. 1
+14:47:41.150 [main] DEBUG org.nd4j.linalg.dataset.AsyncDataSetIterator - Manually destroying ADSI workspace
+14:47:41.207 [main] INFO org.deeplearning4j.optimize.listeners.EvaluativeListener - Reporting evaluation results:
+14:47:41.212 [main] INFO org.deeplearning4j.optimize.listeners.EvaluativeListener - Evaluation:
+
+
+========================Evaluation Metrics========================
+ # of classes:    5
+ Accuracy:        0.3140
+ Precision:       0.6370	(3 classes excluded from average)
+ Recall:          0.2449
+ F1 Score:        0.3986	(3 classes excluded from average)
+Precision, recall & F1: macro-averaged (equally weighted avg. of 5 classes)
+
+Warning: 3 classes were never predicted by the model and were excluded from average precision
+Classes excluded from average precision: [0, 1, 2]
+
+=========================Confusion Matrix=========================
+   0   1   2   3   4
+---------------------
+   0   0   0 136   0 | 0 = 0
+   0   0   0 154   0 | 1 = 1
+   0   0   0  70   0 | 2 = 2
+   0   0   0 188   0 | 3 = 3
+   0   0   0 138  40 | 4 = 4
+
+Confusion matrix format: Actual (rowClass) predicted as (columnClass) N times
+==================================================================
+14:47:41.212 [main] DEBUG org.nd4j.linalg.dataset.AsyncDataSetIterator - Manually destroying ADSI workspace
+14:47:41.268 [main] INFO com.fed.train.model.TaskFedTest - train model 1
+14:48:36.324 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 30 is 0.7486482654083234
+14:49:30.528 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 40 is 0.16785905299825551
+14:49:35.021 [main] INFO org.deeplearning4j.optimize.listeners.EvaluativeListener - Starting evaluation nr. 1
+14:49:44.363 [main] DEBUG org.nd4j.linalg.dataset.AsyncDataSetIterator - Manually destroying ADSI workspace
+14:49:44.421 [main] INFO org.deeplearning4j.optimize.listeners.EvaluativeListener - Reporting evaluation results:
+14:49:44.422 [main] INFO org.deeplearning4j.optimize.listeners.EvaluativeListener - Evaluation:
+
+
+========================Evaluation Metrics========================
+ # of classes:    5
+ Accuracy:        0.3333
+ Precision:       0.6310	(3 classes excluded from average)
+ Recall:          0.2607
+ F1 Score:        0.4506	(3 classes excluded from average)
+Precision, recall & F1: macro-averaged (equally weighted avg. of 5 classes)
+
+Warning: 3 classes were never predicted by the model and were excluded from average precision
+Classes excluded from average precision: [0, 1, 2]
+
+=========================Confusion Matrix=========================
+   0   1   2   3   4
+---------------------
+   0   0   0 136   0 | 0 = 0
+   0   0   0 153   1 | 1 = 1
+   0   0   0  70   0 | 2 = 2
+   0   0   0 188   0 | 3 = 3
+   0   0   0 124  54 | 4 = 4
+
+Confusion matrix format: Actual (rowClass) predicted as (columnClass) N times
+==================================================================
+14:49:44.422 [main] DEBUG org.nd4j.linalg.dataset.AsyncDataSetIterator - Manually destroying ADSI workspace
+14:49:44.477 [main] INFO com.fed.train.model.TaskFedTest - train model 2
+14:50:35.957 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 50 is 0.5510320566026948
+14:51:31.498 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 60 is 0.4615581666173571
+14:51:41.604 [main] INFO org.deeplearning4j.optimize.listeners.EvaluativeListener - Starting evaluation nr. 1
+14:51:51.039 [main] DEBUG org.nd4j.linalg.dataset.AsyncDataSetIterator - Manually destroying ADSI workspace
+14:51:51.097 [main] INFO org.deeplearning4j.optimize.listeners.EvaluativeListener - Reporting evaluation results:
+14:51:51.098 [main] INFO org.deeplearning4j.optimize.listeners.EvaluativeListener - Evaluation:
+
+
+========================Evaluation Metrics========================
+ # of classes:    5
+ Accuracy:        0.5399
+ Precision:       0.7189	(2 classes excluded from average)
+ Recall:          0.5508
+ F1 Score:        0.7755	(2 classes excluded from average)
+Precision, recall & F1: macro-averaged (equally weighted avg. of 5 classes)
+
+Warning: 2 classes were never predicted by the model and were excluded from average precision
+Classes excluded from average precision: [0, 1]
+
+=========================Confusion Matrix=========================
+   0   1   2   3   4
+---------------------
+   0   0   0 111  25 | 0 = 0
+   0   0   0 142  12 | 1 = 1
+   0   0  70   0   0 | 2 = 2
+   0   0   0 184   4 | 3 = 3
+   0   0   0  40 138 | 4 = 4
+
+Confusion matrix format: Actual (rowClass) predicted as (columnClass) N times
+==================================================================
+14:51:51.098 [main] DEBUG org.nd4j.linalg.dataset.AsyncDataSetIterator - Manually destroying ADSI workspace
+14:51:51.155 [main] INFO com.fed.train.model.TaskFedTest - train model 3
+14:52:36.725 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 70 is 0.7833166901649626
+14:53:32.350 [main] INFO org.deeplearning4j.optimize.listeners.ScoreIterationListener - Score at iteration 80 is 0.1420581547357404
+14:53:46.933 [main] INFO org.deeplearning4j.optimize.listeners.EvaluativeListener - Starting evaluation nr. 1
+14:53:57.846 [main] DEBUG org.nd4j.linalg.dataset.AsyncDataSetIterator - Manually destroying ADSI workspace
+14:53:57.907 [main] INFO org.deeplearning4j.optimize.listeners.EvaluativeListener - Reporting evaluation results:
+14:53:57.908 [main] INFO org.deeplearning4j.optimize.listeners.EvaluativeListener - Evaluation:
+
+
+========================Evaluation Metrics========================
+ # of classes:    5
+ Accuracy:        0.3140
+ Precision:       0.6370	(3 classes excluded from average)
+ Recall:          0.2449
+ F1 Score:        0.3986	(3 classes excluded from average)
+Precision, recall & F1: macro-averaged (equally weighted avg. of 5 classes)
+
+Warning: 3 classes were never predicted by the model and were excluded from average precision
+Classes excluded from average precision: [0, 1, 2]
+
+=========================Confusion Matrix=========================
+   0   1   2   3   4
+---------------------
+   0   0   0 136   0 | 0 = 0
+   0   0   0 154   0 | 1 = 1
+   0   0   0  70   0 | 2 = 2
+   0   0   0 188   0 | 3 = 3
+   0   0   0 138  40 | 4 = 4
+
+Confusion matrix format: Actual (rowClass) predicted as (columnClass) N times
+==================================================================
+14:53:57.908 [main] DEBUG org.nd4j.linalg.dataset.AsyncDataSetIterator - Manually destroying ADSI workspace
+14:53:57.966 [main] INFO com.fed.train.model.TaskFedTest - train model 4
+14:54:03.752 [main] DEBUG oshi.util.platform.windows.WmiUtil - Connected to ROOT\CIMV2 WMI namespace
+14:54:03.753 [main] DEBUG oshi.util.platform.windows.WmiUtil - Query: SELECT Version,ProductType,BuildNumber,CSDVersion,SuiteMask FROM Win32_OperatingSystem
+14:54:04.010 [main] DEBUG oshi.software.os.windows.WindowsOSVersionInfoEx - Initialized OSVersionInfoEx
+14:54:04.470 [main] DEBUG oshi.hardware.common.AbstractCentralProcessor - Oracle MXBean detected.
+14:54:04.499 [main] DEBUG oshi.util.platform.windows.WmiUtil - Connected to ROOT\CIMV2 WMI namespace
+14:54:04.499 [main] DEBUG oshi.util.platform.windows.WmiUtil - Query: SELECT ProcessorID FROM Win32_Processor
+14:54:04.512 [main] DEBUG oshi.util.platform.windows.WmiUtil - Connected to ROOT\CIMV2 WMI namespace
+14:54:04.512 [main] DEBUG oshi.util.platform.windows.WmiUtil - Query: SELECT Name,PercentIdleTime,PercentPrivilegedTime,PercentUserTime,PercentInterruptTime,PercentDPCTime FROM Win32_PerfRawData_Counters_ProcessorInformation WHERE NOT Name LIKE "%_Total"
+14:54:04.954 [main] DEBUG oshi.util.platform.windows.WmiUtil - Connected to ROOT\CIMV2 WMI namespace
+14:54:04.954 [main] DEBUG oshi.util.platform.windows.WmiUtil - Query: SELECT PercentInterruptTime,PercentDPCTime FROM Win32_PerfRawData_Counters_ProcessorInformation WHERE Name="_Total"
+14:54:04.965 [main] DEBUG oshi.hardware.platform.windows.WindowsCentralProcessor - Initialized Processor
+14:54:05.163 [main] ERROR org.deeplearning4j.util.CrashReportingUtil - >>> Out of Memory Exception Detected. Memory crash dump written to: D:\Android_project\7.21_Fed\FedServer\dl4j-memory-crash-dump-1601967242150_1.txt
+14:54:05.163 [main] WARN org.deeplearning4j.util.CrashReportingUtil - Memory crash dump reporting can be disabled with CrashUtil.crashDumpsEnabled(false) or using system property -Dorg.deeplearning4j.crash.reporting.enabled=false
+14:54:05.163 [main] WARN org.deeplearning4j.util.CrashReportingUtil - Memory crash dump reporting output location can be set with CrashUtil.crashDumpOutputDirectory(File) or using system property -Dorg.deeplearning4j.crash.reporting.directory=<path>
+Exception in thread "main" java.lang.OutOfMemoryError: Cannot allocate new FloatPointer(42039221): totalBytes = 3534M, physicalBytes = 6390M
+	at org.bytedeco.javacpp.FloatPointer.<init>(FloatPointer.java:76)
+	at org.nd4j.linalg.api.buffer.BaseDataBuffer.<init>(BaseDataBuffer.java:710)
+	at org.nd4j.linalg.api.buffer.FloatBuffer.<init>(FloatBuffer.java:54)
+	at org.nd4j.linalg.api.buffer.factory.DefaultDataBufferFactory.create(DefaultDataBufferFactory.java:290)
+	at org.nd4j.linalg.factory.Nd4j.createBuffer(Nd4j.java:1455)
+	at org.nd4j.linalg.api.ndarray.BaseNDArray.<init>(BaseNDArray.java:341)
+	at org.nd4j.linalg.cpu.nativecpu.NDArray.<init>(NDArray.java:185)
+	at org.nd4j.linalg.cpu.nativecpu.CpuNDArrayFactory.create(CpuNDArrayFactory.java:231)
+	at org.nd4j.linalg.factory.Nd4j.create(Nd4j.java:4274)
+	at org.deeplearning4j.nn.multilayer.MultiLayerNetwork.initGradientsView(MultiLayerNetwork.java:796)
+	at org.deeplearning4j.nn.multilayer.MultiLayerNetwork.calcBackpropGradients(MultiLayerNetwork.java:1823)
+	at org.deeplearning4j.nn.multilayer.MultiLayerNetwork.computeGradientAndScore(MultiLayerNetwork.java:2765)
+	at org.deeplearning4j.nn.multilayer.MultiLayerNetwork.computeGradientAndScore(MultiLayerNetwork.java:2708)
+	at org.deeplearning4j.optimize.solvers.BaseOptimizer.gradientAndScore(BaseOptimizer.java:170)
+	at org.deeplearning4j.optimize.solvers.StochasticGradientDescent.optimize(StochasticGradientDescent.java:63)
+	at org.deeplearning4j.optimize.Solver.optimize(Solver.java:52)
+	at org.deeplearning4j.nn.multilayer.MultiLayerNetwork.fitHelper(MultiLayerNetwork.java:1713)
+	at org.deeplearning4j.nn.multilayer.MultiLayerNetwork.fit(MultiLayerNetwork.java:1634)
+	at org.deeplearning4j.nn.multilayer.MultiLayerNetwork.fit(MultiLayerNetwork.java:1621)
+	at com.fed.train.model.TaskFedTest.main(TaskFedTest.java:144)
+Caused by: java.lang.OutOfMemoryError: Failed to allocate memory within limits: totalBytes (3534M + 160M) > maxBytes (3611M)
+	at org.bytedeco.javacpp.Pointer.deallocator(Pointer.java:655)
+	at org.bytedeco.javacpp.Pointer.init(Pointer.java:127)
+	at org.bytedeco.javacpp.FloatPointer.allocateArray(Native Method)
+	at org.bytedeco.javacpp.FloatPointer.<init>(FloatPointer.java:68)
+	... 19 more
+
+Process finished with exit code 1
