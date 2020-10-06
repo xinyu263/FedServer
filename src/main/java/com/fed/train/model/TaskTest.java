@@ -40,12 +40,12 @@ public class TaskTest {
     public static void main(String[] args) throws IOException {
 
 
-        int height = 370;  // 输入图像高度
-        int width = 1224;   // 输入图像宽度
+        int height = 185;//370  // 输入图像高度
+        int width = 612;//1224   // 输入图像宽度
         int channels = 1; // 输入图像通道数
         int outputNum = 5; //分类
         int batchSize = 64;//64
-        int nEpochs = 3;
+        int nEpochs = 5;
         int seed = 1234;
         Random randNumGen = new Random(seed);
 
@@ -171,10 +171,10 @@ public class TaskTest {
         Evaluation eval = net.evaluate(testIter);
         log.info(eval.stats());
 
-/*        String path="model/MyClassification2.zip";
+        String path="model/MyClassification_compressed.zip";
         File locationToSave = new File(path);
         boolean saveUpdater = true;
-        net.save(locationToSave, saveUpdater);*/
+        net.save(locationToSave, saveUpdater);
 
 /*        MultiLayerNetwork net1=new MultiLayerNetwork(conf1);
         net1.init();

@@ -1,6 +1,7 @@
 MyClassification.zip
 
 训练集95%，测试集5%
+图像为1224*370，灰度图
 
 ========================Evaluation Metrics========================
  # of classes:    5
