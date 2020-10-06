@@ -17,65 +17,64 @@ import org.deeplearning4j.nn.weights.WeightInit;
 import org.deeplearning4j.optimize.api.InvocationType;
 import org.deeplearning4j.optimize.listeners.EvaluativeListener;
 import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
-import org.deeplearning4j.util.ModelSerializer;
 import org.nd4j.evaluation.classification.Evaluation;
 import org.nd4j.linalg.activations.Activation;
 import org.nd4j.linalg.dataset.api.iterator.DataSetIterator;
 import org.nd4j.linalg.dataset.api.preprocessor.DataNormalization;
 import org.nd4j.linalg.dataset.api.preprocessor.ImagePreProcessingScaler;
 import org.nd4j.linalg.learning.config.Adam;
-import org.nd4j.linalg.learning.config.Nadam;
 import org.nd4j.linalg.lossfunctions.LossFunctions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 
-public class TaskTest {
-
-    private static Logger log = LoggerFactory.getLogger(TaskTest.class);
-
+public class TaskFedTest {
+    private static Logger log = LoggerFactory.getLogger(TaskFedTest.class);
     public static void main(String[] args) throws IOException {
-
-
         int height = 370;  // 输入图像高度
         int width = 1224;   // 输入图像宽度
         int channels = 1; // 输入图像通道数
         int outputNum = 5; //分类
         int batchSize = 64;//64
-        int nEpochs = 3;
+        int nEpochs = 10;//本地迭代次数
         int seed = 1234;
         Random randNumGen = new Random(seed);
 
+        String inputDataDir="D:\\Data\\dataOnAndroid\\";
+        int userNum=1;//10，参与方数量
+        int globalIteration=1;
 
-        //String inputDataDir="D:\\Data\\processed\\";
-        //String inputDataDir="D:\\Data\\processedGrey\\";
-        //String inputDataDir="D:\\Data\\processedGrey2\\";
-        String inputDataDir="D:\\Data\\compressedGrey\\";
-
-
-        // 训练数据的向量化
-        File trainData = new File(inputDataDir + "train");
-        FileSplit trainSplit = new FileSplit(trainData, NativeImageLoader.ALLOWED_FORMATS, randNumGen);
-        ParentPathLabelGenerator labelMaker = new ParentPathLabelGenerator(); // parent path as the image label
-        ImageRecordReader trainRR = new ImageRecordReader(height, width, channels, labelMaker);
-        trainRR.initialize(trainSplit);
-        DataSetIterator trainIter = new RecordReaderDataSetIterator(trainRR, batchSize, 1, outputNum);
-
-        // 将像素从0-255缩放到0-1 (用min-max的方式进行缩放)
         DataNormalization scaler = new ImagePreProcessingScaler(0, 1);
-        scaler.fit(trainIter);
-        trainIter.setPreProcessor(scaler);
+        ParentPathLabelGenerator labelMaker = new ParentPathLabelGenerator();
 
-        // 测试数据的向量化
+        //训练数据的向量化
+        ArrayList<File> trainData=new ArrayList<>();
+        ArrayList<FileSplit> trainSplit=new ArrayList<>();
+        ArrayList<ImageRecordReader> trainRR=new ArrayList<>();
+        ArrayList<DataSetIterator> trainIter=new ArrayList<>();
+
+        for(int i=0;i<userNum;i++){
+            trainData.add(new File(inputDataDir + "user"+i));
+            trainSplit.add(new FileSplit(trainData.get(i), NativeImageLoader.ALLOWED_FORMATS, randNumGen));
+            trainRR.add(new ImageRecordReader(height, width, channels, labelMaker));
+            trainRR.get(i).initialize(trainSplit.get(i));
+            trainIter.add(new RecordReaderDataSetIterator(trainRR.get(i), batchSize, 1, outputNum));
+            scaler.fit(trainIter.get(i));
+            trainIter.get(i).setPreProcessor(scaler);
+        }
+
+
+        //测试数据的向量化
         File testData = new File(inputDataDir + "test");
         FileSplit testSplit = new FileSplit(testData, NativeImageLoader.ALLOWED_FORMATS, randNumGen);
         ImageRecordReader testRR = new ImageRecordReader(height, width, channels, labelMaker);
         testRR.initialize(testSplit);
         DataSetIterator testIter = new RecordReaderDataSetIterator(testRR, batchSize, 1, outputNum);
-        testIter.setPreProcessor(scaler); // same normalization for better results
+        testIter.setPreProcessor(scaler);
 
 
         MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
@@ -127,67 +126,34 @@ public class TaskTest {
                 .build();
 
 
-/*        MultiLayerConfiguration conf1 = new NeuralNetConfiguration.Builder()
-                .seed(seed) //include a random seed for reproducibility
-                .activation(Activation.RELU)
-                .weightInit(WeightInit.XAVIER)
-                .updater(new Nadam())
-                .l2(0.0005) // regularize learning model
-                .list()
-                .layer(new DenseLayer.Builder() //create the first input layer.
-                        .nIn(height * width)
-                        .nOut(500)
-                        .build())
-                .layer(new DenseLayer.Builder() //create the second input layer
-                        .nIn(500)
-                        .nOut(100)
-                        .build())
-                .layer(new OutputLayer.Builder(LossFunctions.LossFunction.NEGATIVELOGLIKELIHOOD) //create hidden layer
-                        .activation(Activation.SOFTMAX)
-                        .nOut(outputNum)
-                        .build())
-                .build();*/
+
+        log.info("create model....");
+        //创建各参与者模型
+        ArrayList<MultiLayerNetwork> nets=new ArrayList<>();
+        for (int i=0;i<userNum;i++){
+            nets.add(new MultiLayerNetwork(conf));
+            nets.get(i).init();
+            nets.get(i).setListeners(new ScoreIterationListener(10), new EvaluativeListener(testIter, 1, InvocationType.EPOCH_END));
+        }
+
+        log.info("train model....");
+        //训练
+        for(int i=0;i<globalIteration;i++){
+            for(int j=0;j<userNum;j++){
+                log.info("train model "+j);
+                    nets.get(j).fit(trainIter.get(j),nEpochs);
+            }
+        }
 
 
-
-        // 训练的过程中同时进行评估
-/*        for (int i = 0; i < nEpochs; i++) {
-            net.fit(trainIter);
-            System.out.println("Completed epoch " + i);
-            Evaluation trainEval = net.evaluate(trainIter);
-            Evaluation eval = net.evaluate(testIter);
-            System.out.println("train: " + trainEval.precision());
-            System.out.println("val: " + eval.precision());
-            trainIter.reset();
-            testIter.reset();
+/*        //测试
+        log.info("Evaluate model....");
+        ArrayList<Evaluation> evals=new ArrayList<>();
+        for(int i=0;i<userNum;i++){
+            log.info("Evaluate model "+i);
+            evals.add(nets.get(i).evaluate(testIter));
+            //log.info(evals.get(i).stats());
         }*/
-
-
-        MultiLayerNetwork net = new MultiLayerNetwork(conf);
-        net.init();
-        net.setListeners(new ScoreIterationListener(10), new EvaluativeListener(testIter, 1, InvocationType.EPOCH_END));
-        net.fit(trainIter, nEpochs);
-        log.info("Evaluate model....");
-        Evaluation eval = net.evaluate(testIter);
-        log.info(eval.stats());
-
-/*        String path="model/MyClassification2.zip";
-        File locationToSave = new File(path);
-        boolean saveUpdater = true;
-        net.save(locationToSave, saveUpdater);*/
-
-/*        MultiLayerNetwork net1=new MultiLayerNetwork(conf1);
-        net1.init();
-        net1.setListeners(new ScoreIterationListener(1));  //print the score with every iteration
-        log.info("Train model....");
-        net1.fit(trainIter, nEpochs);
-        log.info("Evaluate model....");
-        Evaluation eval1 = net1.evaluate(testIter);
-        log.info(eval1.stats());*/
-
-
-
+        
     }
-
-
 }
